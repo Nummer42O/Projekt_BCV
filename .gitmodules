@@ -1,0 +1,3 @@
+[submodule "monocular_depth_estimation/MIM-Depth-Estimation"]
+	path = monocular_depth_estimation/MIM-Depth-Estimation
+	url = https://github.com/SwinTransformer/MIM-Depth-Estimation.git
