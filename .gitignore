@@ -4,5 +4,4 @@
 **/kitti
 **/checkpoints
 **/*.zip
-monocular_depth_estimation/command.sh
-monocular_depth_estimation/result*.png
+**/*.png
