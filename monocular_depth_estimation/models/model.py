@@ -11,7 +11,7 @@ import torch.nn as nn
 
 from mmcv.cnn import (build_conv_layer, build_norm_layer, build_upsample_layer,
                       constant_init, normal_init)
-from ..models.swin_transformer_v2 import SwinTransformerV2
+from models.swin_transformer_v2 import SwinTransformerV2
 
 
 class GLPDepth(nn.Module):
