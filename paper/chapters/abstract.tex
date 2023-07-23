@@ -1,0 +1,10 @@
+In the field of robotics it is still somewhat of a challenge to analyse objects and scenes in camera images that are far away from the robot.
+This might not be problematic for many stationary and/or slow moving platforms, but it is easy so see what issues may arise when the speed increases or timing in general gets critical.
+
+Combating this problem can be done by, for example, changing the lens of the camera, which in turn hurts the field of view (FOV). \\
+Another approach would be to employ a higher resolution camera. The problem here is that more bandwidth, aswell as higher computing power would be needed to transport and process those images.
+So every advance into more depth clarity comes with it's own tradeoffs.
+
+Therefor a solution with a smaller cost is needed. For this goal, the \enquote{higher resolution} approach may still be a viable option by using AI upscaling.
+The idea is to use a supersampling model to \enquote{enhance} certain regions of interest in the source image and analyse them further.
+For the sake of evaluation this further analysis will be performed as monocular depth estimation.
