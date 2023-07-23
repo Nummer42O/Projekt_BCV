@@ -2,30 +2,13 @@
 
 ## Abstract
 
-Als Anwendungsszenario wählen wir die POV eines Roboters.
-Im folgenden wird beschrieben, wie die geplanten Themen integriert werden sollen.
-Die hier dargstellte Reihenfolge bezieht sich auch auf die Abarbeitung.
+In the field of robotics it is still somewhat of a challenge to analyse objects and scenes in camera images that are far away from the robot.
+This might not be problematic for many stationary and/or slow moving platforms, but it is easy so see what issues may arise when the speed increases or timing in general gets critical.
 
-### Monocular Depth Estimation
+Combating this problem can be done by, for example, changing the lens of the camera, which in turn hurts the field of view (FOV).
+Another approach would be to employ a higher resolution camera. The problem here is that more bandwidth, aswell as higher computing power would be needed to transport and process those images.
+So every advance into more depth clarity comes with it's own tradeoffs.
 
-Für Tiefeninformation werden klassisch 2 Kameras/Linsen benötigt, was komplexere Algorithmen und genaue Kalibrierungen zwischen den Bildern fordert. Tiefeninformationen über ein Bild/eine Serie von Bildern zu generierenw würde viel dieses Overheads entfernen. Eine einfache Implementierung als schwarz-weiß Bild ist hier angestrebt.
-
-### Image Super-Reosolution
-
-Ein (theoretisch evtl. sogar unendlicher) Tiefenzoom könnte hilfreich sein, wenn einzelne Bildelemente für Algorithmen schwer zu erkennen sind. Eine punktuelle Implementierung von bestimmten regions of interest könnte hier hilfreich sein.
-
-### Deblurring
-
-Dieser Abschnitt ist... relativ selbsterklärend. :)
-
-### Low-Light Image Enhancement
-
-Vor allem für Kanten-suchende Algorithmen wie Canny sind low-light Szenarien ungünstig, da die unterschiede in den graustufen Bildern durch die gerinde 8-bit schnell verschwimmen. Dieses Defizitnauszugleichen könnte durchaus in Algorithmen zum Finden bekannter Muster helfen.
-
-### Image enhancement
-
-Artifakte der Camera, ungewollte optische Effekte, Dreck auf der Linse sind Effekte, welche die Performance von diversen optischen Algorithmen beeinträchtigen können. Diese zu entfernen kann dementsprechend verhindern, dass bestimmte Daten "verloren gehen".
-
-### Image Inpainting
-
-Vor allem im Kontext von Sichtbereichtransformationen, etc. können gerne "blinde Ecken" entstehen, für welche es durchaus sinnvoll wäre, diese mit Kontext zu füllen, um Algorithmen nicht zu "verwirren".
+Therefor a solution with a smaller cost is needed. For this goal, the "higher resolution" approach may still be a viable option by using AI upscaling.
+The idea is to use a supersampling model to "enhance" certain regions of interest in the source image and analyse them further.
+For the sake of evaluation this further analysis will be performed as monocular depth estimation.
