@@ -1,0 +1,12 @@
+\section*{Introduction}
+
+A person operating a motor vehicle always needs to be aware of their surroundings and the environment. They know that the car they saw coming on the background is not gone because the turning car in front of them is blocking it.  This phenomena is called object permanency and is something the majority of humans learn growning up.
+That same concept is not hard for a computer to grasp either but what might be is the preamble of \enquote{detecting the car in the background}. Robots rely heavily on images to orient themselves in their environments but this brings some limitations.
+There are some options to combat this, but they either come with their own tradeoffs or may not be aplicable in all situations.
+
+Changing to a camera with a thicker lense will improve the zoom, but since the image size stayed the same the overall field of view (FOV) is decreased. This may affect close by detection and analysis.
+As a fix for the above method or a standalone approach it might be useful to change recording resolution to something greater. But also this approach has drawbacks as it required way more bandwith and computing power to process those larger images.
+Another fix to the lens problem might be varifocal lenses but they add in complexity/cost and might not be easily applicable in stereo camera setups since both lenses would need to be well synchronized.
+
+A comparatively low cost solution arises in image superresolution implemented as an AI supersampling model. With this method no extra hardware equipment would be needed.
+There would still be an overhead though, but it can be held down by only supersampling specific regions of interest like the end of a road, intersections, entrances, etc.
