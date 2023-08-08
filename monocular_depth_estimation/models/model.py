@@ -18,7 +18,7 @@ class GLPDepth(nn.Module):
     def __init__(self, args=None):
         super().__init__()
         self.max_depth = args.max_depth
-        
+
         if 'tiny' in args.backbone:
             embed_dim = 96
             num_heads = [3, 6, 12, 24]
@@ -46,10 +46,10 @@ class GLPDepth(nn.Module):
         )
 
         self.encoder.init_weights(pretrained=args.pretrained)
-        
+
         channels_in = embed_dim*8
         channels_out = embed_dim
-            
+
         self.decoder = Decoder(channels_in, channels_out, args)
         self.decoder.init_weights()
 
@@ -62,7 +62,7 @@ class GLPDepth(nn.Module):
             if isinstance(m, nn.Conv2d):
                 normal_init(m, std=0.001, bias=0)
 
-    def forward(self, x):                
+    def forward(self, x):
         conv_feats = self.encoder(x)
         out = self.decoder(conv_feats)
         out_depth = self.last_layer_depth(out)
@@ -76,13 +76,13 @@ class Decoder(nn.Module):
         super().__init__()
         self.deconv = args.num_deconv
         self.in_channels = in_channels
-        
+
         self.deconv_layers = self._make_deconv_layer(
             args.num_deconv,
             args.num_filters,
             args.deconv_kernels,
         )
-        
+
         conv_layers = []
         conv_layers.append(
             build_conv_layer(
@@ -96,7 +96,7 @@ class Decoder(nn.Module):
             build_norm_layer(dict(type='BN'), out_channels)[1])
         conv_layers.append(nn.ReLU(inplace=True))
         self.conv_layers = nn.Sequential(*conv_layers)
-        
+
         self.up = nn.Upsample(scale_factor=2, mode='bilinear', align_corners=False)
 
     def forward(self, conv_feats):
@@ -110,7 +110,7 @@ class Decoder(nn.Module):
 
     def _make_deconv_layer(self, num_layers, num_filters, num_kernels):
         """Make deconv layers."""
-        
+
         layers = []
         in_planes = self.in_channels
         for i in range(num_layers):
