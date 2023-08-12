@@ -1,18 +1,23 @@
+# VSCode
 .venv
 .vscode
 
+# general
+**/__pycache__
 **/*.zip
 **/*.png
 **/*.csv
-**/__pycache__
+**/*.svo
 
+# monocular depth estimation specific
 monocular_depth_estimation/checkpoints
-monocular_depth_estimation/*.svo
 
+# super resolution specific
 super_resolution/lowres
 super_resolution/raw_pictures
 super_resolution/results
 
+# paper specific
 paper/*.aux
 paper/*.fdb_latexmk
 paper/*.fls

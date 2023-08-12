@@ -7,3 +7,4 @@ timm>=0.5.4
 albumentations>=1.1.0
 tensorboardX>=2.4.1
 gdown>=4.2.1
+#pyzed (ZED SDK 3.8.2) - it can be installed via the get_python_api.py script in the installation location of the SDK
