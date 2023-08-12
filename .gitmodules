@@ -1,3 +1,0 @@
-[submodule "super_resolution/ESRGAN"]
-	path = super_resolution/ESRGAN
-	url = https://github.com/xinntao/ESRGAN.git
