@@ -1,0 +1,33 @@
+\subsection*{Monocular Depth Estimation}
+
+Depth sensing is traditionally done utilizing multiple lenses with a fixed and known distance and orientation. This concept is based on observations of nature and is also the way our eyes work.
+But apart from this, there are not many methods of "spatial vision". One of those other methods is monocular depth estimation where a depth image is to be guessed from a single perspective by a neural network. Initial works in this area of research are for example 
+%[Saxena et al., 2008; Eigen et al., 2014; Huynh et al., 2020; Yin et al., 2019]
+. There attempts were made to utilize Markov random fields and simpler versons of current concepts like DNN feature encoding.
+Through time many implementations and methods for optiomization where developed. Reletive recently 
+%[Kim et al., 2022]
+proposed Global-Local Path Networks consisting of an encoder and decoder following a global path with skip connections running into "Selective Feature Fusion" (SFF) modules for local features. The general structure can be seen in figure \ref*{GLPDepth_arch}.
+
+\begin{figure}[ht]
+    \begin{center}
+        \includegraphics*[scale=.22, pagebox=artbox]{resources/GLPDepth.png}
+        \caption{GLPDepth architecture} \label{GLPDepth_arch}
+    \end{center}
+\end{figure}
+
+The Encoder consists of 4 (encoding) feature stages with an encoding block each. Between stages the dimensions get reduced by scales $\frac{1}{4}$, $\frac{1}{8}$, $\frac{1}{16}$, $\frac{1}{32}$. This in done to reduce computational overhead. The first 3 stages also host skip connections into the decoder wich will be talked about later.
+
+The Decoder itself follows a similar but reversed structure as the encoder. It scales the dimensions back up by $\frac{1}{16}$, $\frac{1}{8}$, $\frac{1}{4}$ and $\frac{1}{2}$. Inbetween those upsampling steps are so called SFF modules wich merge global features with local features from the skip connections. Their specific construction is as depicted in figure \ref*{SFF_arch}.
+
+\begin{figure}[ht]
+    \begin{center}
+        \includegraphics*[scale=.2, pagebox=artbox]{resources/SFF.png}
+        \caption{SFF architecture} \label{SFF_arch}
+    \end{center}
+\end{figure}
+
+According to the researchers, a big performance boost for GLPDepth was also a data augmentation method they called Vertical CutDepth. It is an offspring of the CutDepth method
+%[Ishii and Yamashita, 2021]
+which cuts a region of interest (ROI) from the source image to create a "new" datapoint. The difference with Vertical CutDepth is, that the ROI only takes a random horizontal position and width but always remains at $y=0$ with the full height. This is due to findings 
+%[Dijk and Croon, 2019]
+in previous depth estimation networks which suggest that they focus more on veritcal then horizontal features.
