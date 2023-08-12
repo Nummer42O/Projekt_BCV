@@ -5,6 +5,8 @@
 **/checkpoints
 **/*.zip
 **/*.png
+**/*.svo
+**/*.csv
 **/__pycache__
 
 **/*.aux
