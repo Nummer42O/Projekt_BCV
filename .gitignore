@@ -1,17 +1,21 @@
-**/*venv*
+.venv
 .vscode
 
-**/kitti
-**/checkpoints
 **/*.zip
 **/*.png
-**/*.svo
 **/*.csv
 **/__pycache__
 
-**/*.aux
-**/*.fdb_latexmk
-**/*.fls
-**/*.log
-**/*.out
-**/*.synctex.gz
+monocular_depth_estimation/checkpoints
+monocular_depth_estimation/*.svo
+
+super_resolution/lowres
+super_resolution/raw_pictures
+super_resolution/results
+
+paper/*.aux
+paper/*.fdb_latexmk
+paper/*.fls
+paper/*.log
+paper/*.out
+paper/*.synctex.gz
