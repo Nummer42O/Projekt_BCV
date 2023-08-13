@@ -1,17 +1,13 @@
 \subsection*{Monocular Depth Estimation}
 
 Depth sensing is traditionally done utilizing multiple lenses with a fixed and known distance and orientation. This concept is based on observations of nature and is also the way our eyes work.
-But apart from this, there are not many methods of "spatial vision". One of those other methods is monocular depth estimation where a depth image is to be guessed from a single perspective by a neural network. Initial works in this area of research are for example 
-%[Saxena et al., 2008; Eigen et al., 2014; Huynh et al., 2020; Yin et al., 2019]
-. There attempts were made to utilize Markov random fields and simpler versons of current concepts like DNN feature encoding.
-Through time many implementations and methods for optiomization where developed. Reletive recently 
-\cite{kim2022global}
-proposed Global-Local Path Networks consisting of an encoder and decoder following a global path with skip connections running into "Selective Feature Fusion" (SFF) modules for local features. The general structure can be seen in figure \ref*{GLPDepth_arch}.
+But apart from this, there are not many methods of "spatial vision". One of those other methods is monocular depth estimation where a depth image is to be guessed from a single perspective by a neural network. Initial works in this area of research are for example \cite{Saxena} \cite{Eigen} \cite{Huynh} \cite{Yin}. There attempts were made to utilize Markov random fields and simpler versons of current concepts like DNN feature encoding.
+Through time many implementations and methods for optiomization where developed. Reletive recently \cite{kim2022global} proposed Global-Local Path Networks consisting of an encoder and decoder following a global path with skip connections running into "Selective Feature Fusion" (SFF) modules for local features. The general structure can be seen in figure \ref*{GLPDepth_arch}.
 
 \begin{figure}[ht]
     \begin{center}
         \includegraphics*[scale=.22, pagebox=artbox]{resources/GLPDepth.png}
-        \caption{GLPDepth architecture} \label{GLPDepth_arch}
+        \caption{GLPDepth architecture \cite{kim2022global}} \label{GLPDepth_arch}
     \end{center}
 \end{figure}
 
@@ -22,12 +18,8 @@ The Decoder itself follows a similar but reversed structure as the encoder. It s
 \begin{figure}[ht]
     \begin{center}
         \includegraphics*[scale=.2, pagebox=artbox]{resources/SFF.png}
-        \caption{SFF architecture} \label{SFF_arch}
+        \caption{SFF architecture \cite{kim2022global}} \label{SFF_arch}
     \end{center}
 \end{figure}
 
-According to the researchers, a big performance boost for GLPDepth was also a data augmentation method they called Vertical CutDepth. It is an offspring of the CutDepth method
-%[Ishii and Yamashita, 2021]
-which cuts a region of interest (ROI) from the source image to create a "new" datapoint. The difference with Vertical CutDepth is, that the ROI only takes a random horizontal position and width but always remains at $y=0$ with the full height. This is due to findings 
-%[Dijk and Croon, 2019]
-in previous depth estimation networks which suggest that they focus more on veritcal then horizontal features.
+According to the researchers, a big performance boost for GLPDepth was also a data augmentation method they called Vertical CutDepth. It is an offspring of the CutDepth method \cite{ishii} which cuts a region of interest (ROI) from the source image to create a "new" datapoint. The difference with Vertical CutDepth is, that the ROI only takes a random horizontal position and width but always remains at $y=0$ with the full height. This is due to findings \cite{dijk} in previous depth estimation networks which suggest that they focus more on veritcal then horizontal features.
