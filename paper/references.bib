@@ -88,6 +88,19 @@
   biburl       = {https://dblp.org/rec/journals/corr/abs-1905-07005.bib},
   bibsource    = {dblp computer science bibliography, https://dblp.org}
 }
+@Article{psnr_ref,
+  author = {Chervyakov, Nikolay and Lyakhov, Pavel and Nagornov, Nikolay},
+  title = {Analysis of the Quantization Noise in Discrete Wavelet Transform Filters for 3D Medical Imaging},
+  journal = {Applied Sciences},
+  volume = {10},
+  year = {2020},
+  number = {4},
+  article-number = {1223},
+  url = {https://www.mdpi.com/2076-3417/10/4/1223},
+  issn = {2076-3417},
+  abstract = {Denoising and compression of 2D and 3D images are important problems in modern medical imaging systems. Discrete wavelet transform (DWT) is used to solve them in practice. We analyze the quantization noise effect in coefficients of DWT filters for 3D medical imaging in this paper. The method for wavelet filters coefficients quantizing is proposed, which allows minimizing resources in hardware implementation by simplifying rounding operations. We develop the method for estimating the maximum error of 3D grayscale and color images DWT with various bits per color (BPC). The dependence of the peak signal-to-noise ratio (PSNR) of the images processing result on wavelet used, the effective bit-width of filters coefficients and BPC is revealed. We derive formulas for determining the minimum bit-width of wavelet filters coefficients that provide a high (PSNR &ge; 40 dB for images with 8 BPC, for example) and maximum (PSNR = &infin; dB) quality of 3D medical imaging by DWT depending on wavelet used. The experiments of 3D tomographic images processing confirmed the accuracy of theoretical analysis. All data are presented in the fixed-point format in the proposed method of 3D medical images DWT. It is making possible efficient, from the point of view of hardware and time resources, the implementation for image denoising and compression on modern devices such as field-programmable gate arrays and application-specific integrated circuits.},
+  doi = {10.3390/app10041223}
+}
 
 @inproceedings{wang2021realesrgan,
   author={Wang, Xintao and Xie, Liangbin and Dong, Chao and Shan, Ying},
@@ -98,4 +111,11 @@
   number={},
   pages={1905-1914},
   doi={10.1109/ICCVW54120.2021.00217}
+}
+@InProceedings{wang2018esrgan,
+    author = {Wang, Xintao and Yu, Ke and Wu, Shixiang and Gu, Jinjin and Liu, Yihao and Dong, Chao and Qiao, Yu and Loy, Chen Change},
+    title = {ESRGAN: Enhanced super-resolution generative adversarial networks},
+    booktitle = {The European Conference on Computer Vision Workshops (ECCVW)},
+    month = {September},
+    year = {2018}
 }

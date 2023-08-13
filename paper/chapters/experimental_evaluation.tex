@@ -1,0 +1,80 @@
+\subsection{Monocular Depth Estimation}
+
+\begin{table}[ht!]
+    \begin{center}
+        \begin{tabular}{ l | r r r r }
+                                & \multicolumn{2}{c}{Nyu Depth V2}  & \multicolumn{2}{c}{KITTI} \\
+                                & cropped   & resized               & cropped   & resized       \\
+            \hline
+            execution time [s]  & 0.524     & 0.528                 & 0.299     & 0.306         \\
+            MSE                 & 10.334    & 30.742                & 1.761     & 0.478         \\
+            PSNR [dB]           & 38.001    & 33.258                & 45.864    & 51.761        \\
+        \end{tabular}
+        \caption{Results of GLPDepth alone. Mean and median did not differ much, so only the mean is depicted.} \label{res_glpdepth}
+    \end{center}
+\end{table}
+
+One preparation step was to lay a baseline of how good the depth estimation performs in real world robotics applications. To do this the same pipeline was used as for the final algorithm (See chapter \ref*{general_subsection}) except for the downscaling and super resolution part in between. By doing this it is possible to get a perspective on if there is a negative impact from the super resolution and if so, how much. Also it enables comparisons against conventional methods and discussions about the practicability and useability of this application. The results are displayed in figure \ref*{res_glpdepth}.
+
+In the data are various trends visible. First of all it is apparent that KITTI seems to perform better across the line on our data which checks out with the closeness to the automotive sector that robotics has. Second it seems that preserving the whole image by scaling it down instead of cropping it helps the algorithm to make better predictions. This is undoubtedly related to findings in the context of Vertical CutDepth \cite{ishii}.
+
+For reference it may be noted that a PSNR in the range of 30 to 50dB is roughly equivalent to lossy image compression \cite{psnr_ref}.
+
+\subsection{Super Resolution}
+
+Before merging the super-resolution with the monocular depth estimation we wanted to provide some data and check how good the algorithm works with random images.
+In our notebook we used 10 raw images with different resolutions. After downscaling and upscaling with the super-resolution algorithm, our next step was to use the PSNR as a metric of how well the process worked. The results are displayed in figure \ref*{res_esrgan}. The PSNR averages to $29.637\mathrm{dB}$.
+
+\begin{table}[ht!]
+    \begin{center}
+        \begin{tabular}{ l | r r r r r }
+            Images      & SPQ   & Bench & Buffalo   & Streetsign    & KKB   \\
+            \hline
+            PSNR [dB]   & 29.84 & 28.26 & 30.42     & 28.85         & 29.53 \\
+        % \end{tabular}
+        % \begin{tabular}{c | r r r r r }
+            Images      & Garden    & Frog  & Dog   & Forecourt & Katze \\
+            \hline
+            PSNR [dB]   & 28.29     & 29.28 & 31.26 & 29.37     & 31.27 \\
+        \end{tabular}
+        \caption{Results of ESRGAN alone.} \label{res_esrgan}
+    \end{center}
+\end{table}
+
+
+\subsection{Combination} \label{general_subsection}
+
+Figure \ref*{flowchart_general} gives a short recap on the whole process. First an image and depth map get extracted from the original video footage. Next they are scaled to accommodate the requirements of the GLPDepth model. The image is then downsized even further to a sixteenth of its original size and restored via the ESRGAN super resolution model. On this result the depth estimation generated an additional depth map which in turn gets compared to the ground truth extracted from the video stream. This comparison is evaluated via MSE and PSNR. The whole process from resizing to producing the depth map estimation is also timed for evaluation. At this point it is worth mentioning that the size reduction is also caught! in the timing but its influence on the final value should be negligible. The program also provides median and mean values for the PSNR, MSE and execution timing.
+Table \ref*{res_general} shows the results from multiple svo files with cropping or scaling on KITTI or Nyu Depth V2.
+
+\begin{table}[ht!]
+    \begin{center}
+        \begin{tabular}{ l | r r r r }
+                                & \multicolumn{2}{c}{Nyu Depth V2}  & \multicolumn{2}{c}{KITTI} \\
+                                & cropped   & resized               & cropped   & resized       \\
+            \hline
+            execution time [s]  & 0.786     & 0.711                 & 0.466     & 0.468         \\
+            MSE                 & 9.472     & 30.884                & 1.534     & 0.645         \\
+            PSNR [dB]           & 38.449    & 33.238                & 46.558    & 50.395        \\
+        \end{tabular}
+        \caption{Results of GLPDepth and ESRGAN together.} \label{res_general}
+    \end{center}
+\end{table}
+
+With respect to the results from the evaluation of the GLPDepth and ESRGAN model it would not be a big stretch to suspect that combining both methods results in immense MSE values and a therefor bad image quality reflecting in the PSNR. But against this assumption the actual evaluation results depicted in figure \ref*{res_general} indicate no significant worsening of the depth map quality against the ground truth.
+The only real difference is to be noted in the execution time which increases over the board by about $0.2\mathrm{s}$. However this is to be expected since there was an extra execution step added.
+
+Although all of this seems to be quite positive, there are still things to consider. One mayor point is that, as can be seen in the "cropped" columns of the evaluation tables \ref*{res_glpdepth} and \ref*{res_general}, it makes a grave difference when images are cropped, since this removes context. This plays a large role in regards to the fact that in the originally intended use case behaves more like cropping, then resizing. Super sampling a certain region of interest from an camera input to focus on distant objects, is in fact an operation on an cropped image.
+
+\begin{figure}[ht!]
+    \begin{center}
+        \includegraphics*[scale=.22, pagebox=artbox]{resources/example_depth.png}
+        \caption{Problematic ground truth example} \label{example_depth}
+    \end{center}
+\end{figure}
+
+Another point to keep in mind is the ground truth, which is not ideal as mentioned before. This can be seen in figure \ref*{example_depth} where there are multiple spots with invalid values like $\mathrm{nan}$ or $\pm\infty$ depicted in full white. All those points need to be disgarded in order to calculate meaningful values.
+
+Overall the combination of both methods appears to be a reasonably well suited for at least rough approximations of distant objects depth maps. Further evaluation would definetly be needed test this in more granularity. The only thing that may impede with plans to use this on a live robotic platform is the processing time since execution times of $~0.5\mathrm{s}$ only yield a framerate of $2\mathrm{fps}$ which is absolutely not sufficient for high speed applications. This gets especially obvious when comparing this to the performance of the ground truth calculation which in our case happenes 15 times a second and was only constrained by the hardware backing it up which in turn is way less powerful then what was used for this evaluation.
+
+From this the last critical point gets aparent. The tests performed here were executed on a machine equipped with an AMD Ryzen 7 3700x 8-core processor, 16GB of RAM and a Nvidia RTX 2070 graphics card. For comparison the svo files were recorded on a Nvidia Jetson Xavier NX board with a Nvidia Carmel ARM v8.2 6-core processor, 16GB of RAM and a Nvidia Volta GPU which simultaniously managed two stereo cameras. This Jetson board is not at all as powerful as the system the tests were performed on, so it should be kept in mind that the execution times may vary and stray further into the positive direction, further decresing the real time usability of this concept.

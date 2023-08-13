@@ -1,4 +1,4 @@
-\documentclass[doktyp=parbeit, hausschrift=false, sprache=english]{TUBAFarbeiten}
+\documentclass[doktyp=parbeit, hausschrift=false, sprache=english, fontsize=12pt]{TUBAFarbeiten}
 
 \usepackage{amssymb}
 \usepackage[fleqn]{amsmath}
@@ -30,6 +30,8 @@
 %\usetikzlibrary{positioning}
 \usetikzlibrary{decorations.pathreplacing,calligraphy}
 
+\linespread{1.25}
+
 \pgfplotsset{compat=1.16}
 \begin{document}
 
@@ -38,17 +40,17 @@
 \begin{abstract}
     \input{chapters/abstract.tex}
 \end{abstract}
-\section*{Introduction}
+\section{Introduction}
 \input{chapters/introduction.tex}
-\section*{Background}
+\section{Background}
 \input{chapters/background_intro.tex}
 \input{chapters/background_nico.tex}
 \input{chapters/background_johannes.tex}
-\section*{Implementation}
+\section{Implementation}
 \input{chapters/implementation.tex}
-\section*{Experimental Evaluation}
+\section{Experimental Evaluation}
 \input{chapters/experimental_evaluation.tex}
-\section*{Conclusion}
+\section{Conclusion}
 \input{chapters/conclusion.tex}
 
 \newpage

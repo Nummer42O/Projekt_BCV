@@ -10,6 +10,8 @@
 **/*.csv
 **/*.svo
 
+**/temp.py
+
 # monocular depth estimation specific
 monocular_depth_estimation/checkpoints
 
@@ -30,3 +32,4 @@ paper/*.toc
 
 !paper/resources/*.png
 paper/resources/Unterschrift*.png
+paper/resources/*.aux
