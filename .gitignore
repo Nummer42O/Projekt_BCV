@@ -14,9 +14,7 @@
 monocular_depth_estimation/checkpoints
 
 # super resolution specific
-super_resolution/lowres
-super_resolution/raw_pictures
-super_resolution/results
+!super_resolution/raw_pictures/*.png
 
 # paper specific
 paper/*.aux
