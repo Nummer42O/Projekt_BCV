@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[doktyp=parbeit, hausschrift=false]{TUBAFarbeiten}
 
 \usepackage{amssymb}
 \usepackage[fleqn]{amsmath}
@@ -6,6 +6,7 @@
 \usepackage{enumitem}
 \usepackage[geometry]{ifsym}
 \usepackage{csquotes}
+\usepackage{cite}
 %\usepackage{graphicx}
 %\usepackage{stackengine}
 \usepackage{pgfplots}
@@ -13,6 +14,15 @@
 \usepackage[english]{babel}
 \usepackage{hyperref}
 \usepackage[english]{cleveref}
+
+\TUBAFTitel{Monocular Depth Estimation on Artificially Scaled Up Camera Images for Robot Applications}
+\TUBAFAutor{Nico Zumpe, Johannes Kohl}
+\TUBAFMatrikel{62351, 64751}
+\TUBAFDatum{14.08.2023}
+\TUBAFBetreuer{Dr. Sandra Lorenz}
+\TUBAFStudiengang{Robotik (Diplom)}
+\TUBAFFakultaet{Fakultät für Mathematik und Informatik}
+\TUBAFInstitut{Institut für Informatik}
 
 \graphicspath{{../resources}}
 
@@ -22,6 +32,8 @@
 
 \pgfplotsset{compat=1.16}
 \begin{document}
+
+\maketitle
 
 \begin{abstract}
     \input{chapters/abstract.tex}
@@ -37,5 +49,21 @@
 \input{chapters/experimental_evaluation.tex}
 \section*{Conclusion}
 \input{chapters/conclusion.tex}
+
+\newpage
+    \thispagestyle{plain}
+\section*{Erklärung der Urheberschaft}
+
+Wir erklären hiermit an Eides statt, dass wir die vorliegende Arbeit ohne Hilfe Dritter und ohne Benutzung anderer als der angegebenen Hilfsmittel angefertigt haben; die aus fremden Quellen direkt oder indirekt übernommenen Gedanken sind als solche kenntlich gemacht. Die Arbeit wurde bisher in gleicher oder ähnlicher Form in keiner anderen Prüfungsbehörde vorgelegt und auch noch nicht veröffentlicht.
+
+\vspace{4cm}
+
+\hspace{0cm} Freiberg, 14.08.2023 \hfill \includegraphics[width=2cm]{resources/Unterschrift_Johannes.png} \hspace{3.2cm} \includegraphics[width=4cm]{resources/Unterschrift_Nico.png} \hspace{0.5cm}
+
+\hspace{0cm} Ort, Datum \hfill Unterschrift Johannes Kohl \hspace{1cm} Unterschrift Nico Zumpe \hspace{0cm}
+
+\newpage
+\bibliographystyle{IEEEtran}
+\bibliography{references.bib}{}
 
 \end{document}
