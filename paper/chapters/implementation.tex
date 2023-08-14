@@ -21,8 +21,30 @@ The logged data gets temporarily stored in a numpy array and later written to an
 
 \subsection{Super Resolution}
 
-The implementation is kept simple. Firstly we downscale the given raw images by x4 using the resize method of OpenCV. Then we load the pretrained model which can be obtained in the README of the ESRGAN \href{https://github.com/xinntao/ESRGAN}{repository} and tell the notebook to use the GPU and CUDA. After loading the model with the parameters, we apply it on the low resolution images. Lastly we calculate the PSNR by using the raw images and the results after the process.
+The implementation is kept simple. Firstly we downscale the given raw-images by x4 using the resize method of Open-CV.
+\begin{figure}[ht!]
+    \begin{center}
+        \includegraphics[scale=.5]{picture_resizing.png}
+        \caption{Resizing the raw-images.} \label{sr_resizing}
+    \end{center}
+\end{figure}
 
+Then we load the pretrained model which can be obtained in README  of the ESRGAN \href{https://github.com/xinntao/ESRGAN}{repository} and tell the notebook to use the GPU and cuda. In the repository are two models we can use, the RRDB_ESRGAN_x4.pth and the RRDB_PSNR_x4.pth. We tested them both and stayed with the ESRGAN model. After loading the model with the parameters, we apply it on the low resolution images.
+\begin{figure}[ht!]
+    \begin{center}
+        \includegraphics[scale=.5]{picture_applying_model.png}
+        \caption{Applying the ESRGAN model.} \label{sr_applying_model}
+    \end{center}
+\end{figure}
+
+Lastly we calculate the PSNR by using the raw images and the results after the process.
+
+\begin{figure}[ht!]
+    \begin{center}
+        \includegraphics[scale=.5]{picture_psnr_calcultion.png}
+        \caption{Calculating the PSNR.} \label{sr_psnr_calc}
+    \end{center}
+\end{figure}
 
 \subsection{Combination}
 
