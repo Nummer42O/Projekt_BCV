@@ -1,6 +1,6 @@
-\subsection*{Super Resolution}
+\subsection{Super-resolution}
 
-Super-Resolution is an active research topic, which focuses on recovering a high-resolution image from a low-resolution image. In the paper we used, the main goal is to achieve better overall perceptual quality for super-resolution. In this paper used for our algorithm the basic architecture of SRResNet is used. \cite{wang2018esrgan}
+Super-resolution is an active research topic, which focuses on recovering a high-resolution image from a low-resolution image. In the original paper \cite{wang2018esrgan}, the main goal is to achieve better overall perceptual quality for super-resolution. In the paper used in this algorithm the basic architecture of SRResNet is used. 
 
 \begin{figure}[ht]
     \begin{center}
@@ -9,7 +9,7 @@ Super-Resolution is an active research topic, which focuses on recovering a high
     \end{center}
 \end{figure}
 
-To improve the quality of the recovered image by the super-resolution, there are 2 modifications made to the structure of the generator. Firstly all Batch Normalization layers are removed. Secondly the replacement of the original basic blocks with the Residual-in-Residual Dense Blocks (RRDB). Those combine multi-level residual networks and dense connections.
+To improve the quality of the recovered image by the super-resolution, there are two modifications made to the structure of the generator. Firstly all Batch Normalization layers are removed. Secondly the replacement of the original basic blocks with the Residual-in-Residual Dense Blocks (RRDB). Those combine multi-level residual networks and dense connections.
 
 \begin{figure}[ht]
     \begin{center}
@@ -18,11 +18,8 @@ To improve the quality of the recovered image by the super-resolution, there are
     \end{center}
 \end{figure}
 
-The discriminator based on the Relativistic GAN is also enhanced. The relativistic discriminator tries to predict the probability that a real image is relatively more realistic than a fake one. Specifically in[Ref paper] they replaced the standard discriminator with the relativistic average Discriminator RaD.
+The discriminator based on the Relativistic GAN is also enhanced. The relativistic discriminator tries to predict the probability that a real image is relatively more realistic than a fake one. Specifically in \cite{wang2018esrgan} they replaced the standard discriminator with the relativistic average Discriminator RaD.
 
-Also a more effective perceptual loss is developed. Perceptual loss is defined on the activation layers of a pre-trained deep network. In that Network the distance between two activated features is minimized. It is changed so the features are used before the activation layers. A more suitable perceptual loss is developed based on a fine-tuned VGG network for material recognition. It focuses more on textures rather than objects, because the researcher in [Referenz Paper] believe that perceptual loss focused on texture ist critical for super-resolution.
+Also a more effective perceptual loss is developed. Perceptual loss is defined on the activation layers of a pre-trained deep network. In that Network the distance between two activated features is minimized. It is changed so the features are used before the activation layers. A more suitable perceptual loss is developed based on a fine-tuned VGG network for material recognition. It focuses more on textures rather than objects, because the researchers in \cite{wang2018esrgan} believe that perceptual loss focused on texture ist critical for super-resolution.
 
-Because there is undesired noise in GAN-based methods, a flexible and effective strategy is proposed which is called network interpolation. First a PSNR-oriented network is trained and out of that a GAN-based network is obtained due to fine-tuning. All corresponding parameters of the two networks are interpolated to get an interpolated model. This interpolated model has two advantages. First it is able to produce meaningful results for any usable interpolation parameter without introducing artifacts. Secondly it's possible to continuously balance perceptual quality without the need of re-training the model.
-
-
-
+Because there is undesired noise in GAN-based methods, a flexible and effective strategy is proposed which is called network interpolation. First a network oriented on peak signal to noise ratio is trained and from that a GAN-based network is obtained by fine-tuning. All corresponding parameters of the two networks are interpolated to get a new model. This interpolated model has two advantages. First it is able to produce meaningful results for any usable interpolation parameter without introducing artifacts. Second it is possible to continuously balance perceptual quality without the need of re-training the model.
